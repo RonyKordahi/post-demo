@@ -1,36 +1,27 @@
-import React, {useEffect, useState} from "react";
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 
-function App() {
-    const [state, setState] = useState("");
+import Get from "./Get";
+import Post from "./Post";
 
-    useEffect(() => {
-        fetch("/home")
-            .then(res => res.json())
-            .then(data => setState(data))
-    }, [])
-
-    // useEffect(() => {
-    //     fetch("/home", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             'Accept': 'application/json',
-    //         },
-    //         body: JSON.stringify({name: "Rony", coolDemo: true}) // double quotes here are NECESSARY
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => setState(data))
-    // }, [])
+const App = () => {
 
     return (
-        <>
-            <h1>The server responded with:</h1>
-            <h2 style={{fontWeight: "normal"}}>"{state.message}"</h2>
-            {/* <form onSubmit={submitForm}>
-                <input type="text" name="firstName" />
-            </form> */}
-        </>
-    );
+        <Router>
+
+            <div>
+                <h1><Link to="/">Get</Link></h1>
+                <h1><Link to="/post">Post</Link></h1>
+            </div>
+
+            <Routes>
+                
+                <Route path="/" element={<Get />} />
+
+                <Route path="/post" element={<Post />} />
+
+            </Routes>
+        </Router>
+    )
 }
 
 export default App;
